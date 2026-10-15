@@ -1,6 +1,6 @@
 cask "claude-anchor" do
-  version "0.3.1"
-  sha256 "d707af20eb676da4c76c4c7656b9a21b37ba4e4575c109fa50b43f3bc32a1a8c"
+  version "0.3.2"
+  sha256 "6588ce5f0052fb07b6d0f09d87b4e70b39608cf3612f903c1c24f18e725f22f8"
 
   url "https://github.com/SumithSB/claude-anchor/releases/download/v#{version}/ClaudeAnchor-#{version}.zip"
   name "Claude Anchor"
