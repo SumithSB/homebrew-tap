@@ -4,7 +4,7 @@ cask "claude-anchor" do
 
   url "https://github.com/SumithSB/claude-anchor/releases/download/v#{version}/ClaudeAnchor-#{version}.zip"
   name "Claude Anchor"
-  desc "Menu bar switcher for Claude Code accounts"
+  desc "Routes Claude Code to the right account per folder, with limits and usage"
   homepage "https://github.com/SumithSB/claude-anchor"
 
   livecheck do
@@ -16,9 +16,9 @@ cask "claude-anchor" do
 
   app "Claude Anchor.app"
 
-  # The app is ad-hoc signed, not notarized; this lets it open without a Gatekeeper block.
-  postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Claude Anchor.app"]
+  # The app is ad-hoc signed, not notarized; clearing quarantine lets it open without a Gatekeeper block.
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Claude Anchor.app"]
   end
 
   uninstall quit: "com.sumithsb.claude-anchor"
@@ -29,6 +29,8 @@ cask "claude-anchor" do
     To route `claude` in the terminal, add this line to ~/.zshrc:
       source ~/.claude-anchor/anchor.zsh
     (The file is created the first time Claude Anchor opens.)
+
+    `brew upgrade` quits Claude Anchor; open it again from Applications afterwards.
 
     `brew uninstall --zap` also deletes ~/.claude-anchor, including extra accounts' history.
   EOS
